@@ -1,0 +1,18 @@
+.navbar{
+    max-width: 1440px;
+    margin: 0 auto;
+    font-family: Rubik;
+    display: flex;
+    justify-content: space-between;
+    padding: 0 5% 0 5%;
+}
+span{
+    color: #64caca;
+}
+
+@media screen and (max-width: 700px) {
+    .navbar{
+        flex-direction: column;
+        align-items: center;
+    }
+}
