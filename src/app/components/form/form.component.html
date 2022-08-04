@@ -1,28 +1,32 @@
-<form class="form-container">
+<form class="form-container" [formGroup]="form">
     <div class="form-content">
         <mat-form-field>
             <mat-label class="form-origin">
                 Origen
             </mat-label>
-            <input type="text" matInput required [formControl]="origin" [ngModel]="originModel" (ngModelChange)="originModel = $event.toUpperCase()">
-            <mat-error *ngIf="origin.invalid">{{getErrorMessageOrigin()}}</mat-error>
+            <input type="text" matInput required formControlName="origin">
+            <mat-error *ngIf="form.controls['origin'].invalid">{{getErrorMessageOrigin()}}</mat-error>
         </mat-form-field>
 
         <mat-form-field>
             <mat-label class="form-destination">
                 Destino
             </mat-label>
-            <input type="text" matInput required [formControl]="destination" [ngModel]="destinationModel" (ngModelChange)="destinationModel = $event.toUpperCase()">
-            <mat-error *ngIf="destination.invalid">{{getErrorMessageDestination()}}</mat-error>
+            <input type="text" matInput required formControlName="destination">
+            <mat-error *ngIf="form.controls['destination'].invalid">{{getErrorMessageDestination()}}</mat-error>
         </mat-form-field>
 
         <button mat-raised-button color="accent" class="form-button" 
-                [disabled]="!(destination.valid && origin.valid) || ((destinationModel == originModel) && (originModel == destinationModel))"
-            (click)="submitForm()">Buscar Vuelos</button>
+                [disabled]="!(form.controls['destination'].valid && form.controls['origin'].valid) || 
+                ((form.controls['destination'].value.toUpperCase() == form.controls['origin'].value.toUpperCase()) 
+                || (form.controls['origin'].value == form.controls['destination'].value))"
+                (click)="submitForm()">Buscar Vuelos</button>
     </div>
 
     <div class="form-error animate__animated animate__bounce" 
-         *ngIf="(destinationModel == originModel) && (originModel == destinationModel) && destinationModel != ''">
+         *ngIf="((form.controls['destination'].value.toUpperCase() == form.controls['origin'].value.toUpperCase()) 
+                || (form.controls['origin'].value.toUpperCase() == form.controls['destination'].value.toUpperCase())) 
+                && form.controls['destination'].value != ''">
         <div class="form-error-message">
             ¡No puedes ingresar valores iguales en ambas casillas! 
         </div>
