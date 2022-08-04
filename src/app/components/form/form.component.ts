@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, Validators } from '@angular/forms';
+import { FormControl, Validators, FormGroup, FormBuilder} from '@angular/forms';
 
 @Component({
   selector: 'app-form',
@@ -8,49 +8,56 @@ import { FormControl, Validators } from '@angular/forms';
 })
 export class FormComponent implements OnInit {
 
+  form:FormGroup = this.FormBuilder.group({
+    origin: ['', [ Validators.required,  Validators.maxLength(3), Validators.minLength(3), Validators.pattern('^[a-zA-Z]*') ] ],
+    destination: ['', [ Validators.required, Validators.maxLength(3), Validators.minLength(3), Validators.pattern('^[a-zA-Z]*') ] ]
+  });
 
-  origin = new FormControl('', [Validators.required, Validators.maxLength(3), Validators.minLength(3), Validators.pattern('^[a-zA-Z]*'), ]);
-  destination = new FormControl('', [Validators.required, Validators.maxLength(3), Validators.minLength(3), Validators.pattern('^[a-zA-Z]*'), ]);
+ 
 
-  originModel:string = '';
-  destinationModel:string = '';
+  originValue:string = '';
+  destinationValue:string = '';
 
-  constructor() { }
+  constructor( private FormBuilder: FormBuilder) { }
 
   ngOnInit(): void {
+    
   }
 
 
 
   getErrorMessageOrigin() {
-    if (this.origin.hasError('required')) {
+    if (this.form.controls['origin'].hasError('required')) {
       return 'Debes ingresar un origen';
     }
-    if (this.origin.hasError('maxlength') || this.origin.hasError('minlength')) {
+    if (this.form.controls['origin'].hasError('maxlength') || this.form.controls['origin'].hasError('minlength')) {
       return 'Debes ingresar únicamente tres letras';
     }
-    if (this.origin.hasError('pattern')) {
+    if (this.form.controls['origin'].hasError('pattern')) {
       return 'Debes ingresar únicamente letras';
     }
     return '';
   }
 
   getErrorMessageDestination() {
-    if (this.destination.hasError('required')) {
+    if (this.form.controls['destination'].hasError('required')) {
       return 'Debes ingresar un destino';
     }
-    if (this.destination.hasError('maxlength') || this.destination.hasError('minlength')) {
+    if (this.form.controls['destination'].hasError('maxlength') || this.form.controls['destination'].hasError('minlength')) {
       return 'Debes ingresar únicamente tres letras';
     }
-    if (this.destination.hasError('pattern')) {
+    if (this.form.controls['destination'].hasError('pattern')) {
       return 'Debes ingresar únicamente letras';
     }
     return '';
   }
 
   submitForm(){
+    this.originValue = this.form.controls['origin'].value.toUpperCase()
+    this.destinationValue = this.form.controls['destination'].value.toUpperCase()
+    console.log(this.originValue,this.destinationValue);
 
-    //here goes the http call
+    //Here goes the HTTP call
   }
 
 }
