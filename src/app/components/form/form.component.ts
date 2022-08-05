@@ -1,5 +1,7 @@
-import { Component, OnInit } from '@angular/core';
-import { FormControl, Validators, FormGroup, FormBuilder} from '@angular/forms';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Validators, FormGroup, FormBuilder} from '@angular/forms';
+import { Flightrequest } from 'src/app/interfaces/interfaces.interface';
+import { FlightService } from '../../services/flight.service';
 
 @Component({
   selector: 'app-form',
@@ -13,18 +15,18 @@ export class FormComponent implements OnInit {
     destination: ['', [ Validators.required, Validators.maxLength(3), Validators.minLength(3), Validators.pattern('^[a-zA-Z]*') ] ]
   });
 
- 
+  @Output() userRequest:EventEmitter<Flightrequest> =new EventEmitter();
+
 
   originValue:string = '';
   destinationValue:string = '';
 
-  constructor( private FormBuilder: FormBuilder) { }
+  constructor( private FormBuilder: FormBuilder,
+               private FlightService:FlightService) { }
 
   ngOnInit(): void {
     
   }
-
-
 
   getErrorMessageOrigin() {
     if (this.form.controls['origin'].hasError('required')) {
@@ -55,9 +57,14 @@ export class FormComponent implements OnInit {
   submitForm(){
     this.originValue = this.form.controls['origin'].value.toUpperCase()
     this.destinationValue = this.form.controls['destination'].value.toUpperCase()
-    console.log(this.originValue,this.destinationValue);
 
-    //Here goes the HTTP call
+    let request:Flightrequest = {
+      origin: this.originValue,
+      destination: this.destinationValue
+    }
+    this.userRequest.emit(request);
+    this.FlightService.newRequest$.emit(request);
+
   }
 
 }
