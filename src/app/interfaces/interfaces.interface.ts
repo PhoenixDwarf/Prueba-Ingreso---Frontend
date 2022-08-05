@@ -1,3 +1,4 @@
+//interfaces from UML design
 
 export interface Transport{
     flightCarrier:   string;
@@ -16,4 +17,23 @@ export interface Journey{
     origin:          string;
     destination:     string;
     price:           number;
+}
+
+export interface Flightrequest{
+    origin: string;
+    destination: string;
+}
+
+// Mapping api response
+
+export interface ApiResponse {
+    departureStation: string;
+    arrivalStation:   string;
+    flightCarrier:    FlightCarrier;
+    flightNumber:     string;
+    price:            number;
+}
+
+export enum FlightCarrier {
+    Co = "CO",
 }

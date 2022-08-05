@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { ApiResponse, Flight, Flightrequest } from 'src/app/interfaces/interfaces.interface';
 
 @Component({
   selector: 'app-root',
@@ -7,4 +8,7 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'PruebaTecnica';
+  parentFlightData!: ApiResponse[];
+  parentDataRequest!: Flightrequest;
 }
+
