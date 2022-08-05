@@ -1,6 +1,57 @@
-<div class="container">
-    <pre> Opción 1: <br><br> {{Journey1 | json}} <br><br> Opción 2: <br> {{Journey2 | json}} <br><br> Opción 3: <br> {{Journey3 | json}}</pre>
-    <pre>{{arrayFirstStops | json}}</pre>
-    <pre>{{arraySecondStops | json}}</pre>
+<div class="card" *ngIf="calculatedJourney1.flights.length > 0">
+    <div class="card-option">
+        <div class="card-option-left">
+            <span class="card-option-name">
+                De <strong>{{calculatedJourney1.origin}}</strong> a <strong>{{calculatedJourney1.destination}} </strong>
+            </span>
+            <span>Opción 1:</span>
+        </div>
+        <div class="card-option-route">
+            <h1 *ngFor="let stops of calculatedJourney1.flights">
+                {{stops.origin}} <mat-icon>east</mat-icon> {{stops.destination}}
+            </h1>
+            <h3>Precio: {{calculatedJourney1.price | currencyConverter: selectedCurrency | currency }}</h3>
+        </div>
+    </div>
 </div>
 
+<div class="card" *ngIf="calculatedJourney2.flights.length > 0">
+    <div class="card-option">
+        <div class="card-option-left">
+            <span class="card-option-name">
+                De <strong>{{calculatedJourney2.origin}}</strong> a <strong>{{calculatedJourney2.destination}} </strong>
+            </span>
+            <span>Opción 2:</span>
+        </div>
+        <div class="card-option-route">
+            <h1 *ngFor="let stops of calculatedJourney2.flights">
+                {{stops.origin}} <mat-icon>east</mat-icon> {{stops.destination}}
+            </h1>
+            <h3>Precio: {{calculatedJourney2.price | currencyConverter: selectedCurrency | currency }}</h3>
+        </div>
+    </div>
+</div>
+
+<div class="card" *ngIf="calculatedJourney3.flights.length > 0">
+    <div class="card-option">
+        <div class="card-option-left">
+            <span class="card-option-name">
+                De <strong>{{calculatedJourney3.origin}}</strong> a <strong>{{calculatedJourney3.destination}} </strong>
+            </span>
+            <span>Opción 3:</span>
+        </div>
+        <div class="card-option-route">
+            <h1 *ngFor="let stops of calculatedJourney3.flights">
+                {{stops.origin}} <mat-icon>east</mat-icon> {{stops.destination}}
+            </h1>
+            <h3>Precio: {{calculatedJourney3.price | currencyConverter: selectedCurrency | currency }}</h3>
+        </div>
+    </div>
+</div>
+
+<div class="card error animate__animated animate__bounce"
+    *ngIf="(calculatedJourney1.flights.length == 0) && (wasBottonClicked == true)">
+    <div class="card-option">
+        <h2>Su consulta no puede ser procesada :(</h2>
+    </div>
+</div>

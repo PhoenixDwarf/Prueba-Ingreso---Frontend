@@ -10,6 +10,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { MaterialModule } from './material/material.module';
 import { NavbarComponent } from './shared/navbar/navbar.component';
 import { FlightcardComponent } from './components/flightcard/flightcard.component';
+import { CurrencyConverterPipe } from './pipes/currency-converter.pipe';
 
 
 @NgModule({
@@ -17,7 +18,8 @@ import { FlightcardComponent } from './components/flightcard/flightcard.componen
     AppComponent,
     NavbarComponent,
     FormComponent,
-    FlightcardComponent
+    FlightcardComponent,
+    CurrencyConverterPipe
   ],
   imports: [
     AppRoutingModule,

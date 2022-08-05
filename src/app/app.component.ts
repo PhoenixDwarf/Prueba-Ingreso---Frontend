@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { ApiResponse, Flight, Flightrequest } from 'src/app/interfaces/interfaces.interface';
+import { ApiResponse, Flightrequest } from 'src/app/interfaces/interfaces.interface';
 
 @Component({
   selector: 'app-root',
@@ -10,5 +10,7 @@ export class AppComponent {
   title = 'PruebaTecnica';
   parentFlightData!: ApiResponse[];
   parentDataRequest!: Flightrequest;
+  parentDataCurrency!: string;
+  parentDataSpinner: boolean = false;
 }
 

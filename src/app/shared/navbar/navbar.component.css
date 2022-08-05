@@ -5,14 +5,24 @@
     display: flex;
     justify-content: space-between;
     padding: 0 5% 0 5%;
+    align-items: center;
 }
 span{
     color: #64caca;
+}
+
+.card-option-route-select{
+    width: 15%;
 }
 
 @media screen and (max-width: 700px) {
     .navbar{
         flex-direction: column;
         align-items: center;
+    }
+    .card-option-route-select{
+        width: auto;
+        margin-top: 20px;
+        margin-bottom: 20px;
     }
 }
