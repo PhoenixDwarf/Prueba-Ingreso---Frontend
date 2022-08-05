@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { ApiResponse, Flight, Journey } from '../../interfaces/interfaces.interface';
 import { Flightrequest } from 'src/app/interfaces/interfaces.interface';
 import { FlightService } from '../../services/flight.service';
@@ -12,6 +12,8 @@ export class FlightcardComponent implements OnInit {
 
   flightsData: ApiResponse[] = [];
   @Input() userRequestData!: Flightrequest;
+  @Input() selectedCurrency: string = '';
+  @Output() showSpinner:EventEmitter<boolean> =new EventEmitter();
 
   calculatedJourney1: Journey = {
     origin: '',
@@ -43,10 +45,11 @@ export class FlightcardComponent implements OnInit {
   };
 
   arrayFirstStops: ApiResponse[] = [];
-  arraySecondStops: ApiResponse[] = []; //PENDING
+  arraySecondStops: ApiResponse[] = [];
   isDirectFlight: boolean = false;
-
   flightOptions: number = 1;
+  wasBottonClicked: boolean = false;
+
 
   constructor(private FlightService: FlightService) { }
 
@@ -54,11 +57,13 @@ export class FlightcardComponent implements OnInit {
     this.FlightService.getFlights2().subscribe({
       next: (res) => {
         this.flightsData = res;
-        console.log(this.flightsData);
+        this.showSpinner.emit(true);
       }
     });
 
     this.FlightService.newRequest$.subscribe(request => {
+
+      this.wasBottonClicked = true;
       //reseting porperties
       this.resetProperties();
       //setupOriginAndDestination

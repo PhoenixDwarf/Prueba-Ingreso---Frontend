@@ -1,4 +1,7 @@
-<form class="form-container" [formGroup]="form">
+<div class="spinner">
+    <mat-spinner *ngIf="!showSpinner"></mat-spinner>
+</div>
+<form class="form-container" [formGroup]="form" *ngIf="showSpinner">
     <div class="form-content">
         <mat-form-field>
             <mat-label class="form-origin">

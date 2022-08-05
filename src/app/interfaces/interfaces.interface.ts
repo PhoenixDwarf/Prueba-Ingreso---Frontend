@@ -37,3 +37,10 @@ export interface ApiResponse {
 export enum FlightCarrier {
     Co = "CO",
 }
+
+//Currency
+
+export interface Currency {
+    value:      string;
+    viewValue:  string;
+}

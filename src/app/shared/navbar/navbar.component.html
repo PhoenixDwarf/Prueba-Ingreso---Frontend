@@ -3,6 +3,10 @@
         <h1>NEWSHORE AIR <mat-icon>flight</mat-icon></h1> 
     </div>
     <div class="navbar-right">
-        <h2>Prueba Tecnica por<span> Edwin Nemeguen</span></h2>
+        <h3>Prueba Tecnica por<span> Edwin Nemeguen</span></h3>
     </div> 
+    <mat-select [(value)]="currencyOption" class="card-option-route-select" placeholder="Seleccionar divisa" (selectionChange)="currencyChange()">
+        <mat-option></mat-option>
+        <mat-option [value]="option.value" *ngFor="let option of currency">{{ option.viewValue }}</mat-option>
+    </mat-select>
 </nav>

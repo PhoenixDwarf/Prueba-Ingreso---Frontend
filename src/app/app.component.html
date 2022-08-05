@@ -1,8 +1,8 @@
-<app-navbar></app-navbar>
+<app-navbar (selectedCurrency)="parentDataCurrency=$event"></app-navbar>
 <div class="main-container">
     <div class="main-container-center">
-        <app-form (userRequest)="parentDataRequest=$event"></app-form>
-        <app-flightcard [userRequestData]="parentDataRequest"></app-flightcard>
+        <app-form (userRequest)="parentDataRequest=$event" [showSpinner]="parentDataSpinner"></app-form>
+        <app-flightcard [userRequestData]="parentDataRequest" [selectedCurrency]="parentDataCurrency" (showSpinner)="parentDataSpinner=$event"></app-flightcard>
     </div>
     
 </div>

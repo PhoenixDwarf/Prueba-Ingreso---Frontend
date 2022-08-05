@@ -1,4 +1,48 @@
-.container{
+.card{
+    justify-content: space-around;
+    margin-top: 50px;
+    background-color: #ffffff;
+    border-radius: 10px;
+    display:flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    padding: 5px 20px 5px 20px;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+}
+.card-option{
     display: flex;
     justify-content: space-around;
+    width: 100%;
+    align-items: center;
+}
+.card-option-route{
+    display: flex;
+    justify-content: space-around;
+    width: 85%;
+    align-items: center;
+}
+.card-option-left{
+    display: flex;
+    flex-direction: column;
+    width: 15%;
+}
+.card-option-name{
+    padding-right: 10px;
+}
+.error{
+    background-color: #f76b6b;
+    color: #ffffff;
+}
+
+@media screen and (max-width: 700px) {
+    
+    .card-option{
+        flex-direction: column;
+    }
+
+    .card-option-left{
+        width: auto;
+        flex-direction: row;
+    }
 }

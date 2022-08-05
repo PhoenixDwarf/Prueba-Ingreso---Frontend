@@ -1,4 +1,4 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Validators, FormGroup, FormBuilder} from '@angular/forms';
 import { Flightrequest } from 'src/app/interfaces/interfaces.interface';
 import { FlightService } from '../../services/flight.service';
@@ -16,6 +16,7 @@ export class FormComponent implements OnInit {
   });
 
   @Output() userRequest:EventEmitter<Flightrequest> =new EventEmitter();
+  @Input() showSpinner:boolean = false;
 
 
   originValue:string = '';
